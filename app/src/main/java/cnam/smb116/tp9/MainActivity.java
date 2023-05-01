@@ -46,10 +46,15 @@ public class MainActivity extends AppCompatActivity {
                 if(intent.getAction().equals(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)) {
                     if (ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                         List<ScanResult> scanResults = wifiManager.getScanResults();
-                        Toast.makeText(MainActivity.this, scanResults.size() + " point(s) d'accès Wi-Fi trouvé(s)", Toast.LENGTH_SHORT).show();
-                        wifiListAdapter.clear();
-                        wifiListAdapter.addAll(scanResults);
-                        wifiListAdapter.notifyDataSetChanged();
+                        if(scanResults.size() == 0)
+                            Toast.makeText(MainActivity.this, "Aucun point d'accès trouvé, veuillez activer votre localisation ou vous déplacer près d'un point d'accès Wi-Fi", Toast.LENGTH_LONG).show();
+                        else {
+                            Toast.makeText(MainActivity.this, scanResults.size() + " point(s) d'accès Wi-Fi trouvé(s)", Toast.LENGTH_SHORT).show();
+                            wifiListAdapter.clear();
+                            wifiListAdapter.addAll(scanResults);
+                            wifiListAdapter.notifyDataSetChanged();
+                        }
+
                     }
                 }
             }
