@@ -23,13 +23,10 @@ public class WifiListAdapter extends ArrayAdapter<ScanResult> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         View listItem = convertView;
-
         if (listItem == null) {
             listItem = LayoutInflater.from(mContext).inflate(R.layout.list_point_wifi, parent, false);
         }
-
         ScanResult wifi = mWifiList.get(position);
 
         TextView ssidTextView = listItem.findViewById(R.id.ssidTextView);
